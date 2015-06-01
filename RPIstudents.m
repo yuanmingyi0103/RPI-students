@@ -43,4 +43,7 @@ for i = 1:m;
     end
 end
 
+xlswrite('Cross out blanks in registered 14.xlsx',num(:,45),'AS2:AS1359')
+
+%% 
         
