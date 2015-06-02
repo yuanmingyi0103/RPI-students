@@ -62,23 +62,40 @@ end
 
 a = A(:,1)
 
+A
+
 [B,I] = sort(abs(a));
 
 keep = I(13:end);
-A = A(:,keep);
+A = A(keep,:);
 
 SAT = A(:,45);
 SAT_mean_centered = SAT - mean(SAT);
 
 first_year_GPA = A(:,50);
 
+
 C = cov(SAT_mean_centered, first_year_GPA);
 
 % imagesc(C)   
 % colormap(gray);
 % colorbar;
+%% Clustering, run K-means for nC=3 clusters
 
-% B = A(:,[45,50])
+nC = 3;
+SATreg = num(:,[45,47]);
+
+% Do k-means with 10 restarts. 
+opts = statset('Display','final');
+[cidx, ctrs, SUMD, D]= kmeans(SATreg, nC,'Replicates',10,'Options',opts);
+
+% K=means objective
+objective = sum(SUMD)
+
+
+
+
+
 
 
 
