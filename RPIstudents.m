@@ -67,9 +67,9 @@ figure
 hold on 
 for i = 1:m
     if num(i,51) == 0
-        plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','red')
+        plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','r')
     else if num(i,51) == 1
-            plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','blue')
+            plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','k')
             
         end
     end
@@ -103,7 +103,15 @@ title('Survey Questions 12 13 14 16');
 xlabel('Answers');
 ylabel('Students');
 
+%% Covariance on survey
 
+AllSurvey = A(:,2:36)
 
+% survey_N = size(AllSurvey,1) ;
+% img_mean = mean(AllSurvey);
+% Survey_mean_centered = AllSurvey - ones(survey_N,1)*img_mean
+
+probplot(num(:,50:51))
+legend
 
         
