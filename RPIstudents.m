@@ -82,10 +82,26 @@ title('SAT, First year GPA, Returned Fall 2015');
 hold off
 
 %% Survey part
-survey = A(:,[2,3,4,14]); % take out the parts i think are important
+SurveyGrades = A(:,[2,3,4]); % take out the parts i think are important
+SurveyMath = A(:,[13,14,15,17]);
 
+SurveyGrades = sort(SurveyGrades,'descend');
+figure
+imagesc(SurveyGrades)
+colorbar
+title('Survey Questions 1 2 3');
+xlabel('Answers');
+ylabel('Students');
 
+% boxplot(SurveyGrades)
 
+figure
+SurveyMath = sort(SurveyMath,'descend');
+imagesc(SurveyMath)
+colorbar
+title('Survey Questions 12 13 14 16');
+xlabel('Answers');
+ylabel('Students');
 
 
 
