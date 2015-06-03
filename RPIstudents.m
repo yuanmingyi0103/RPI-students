@@ -4,47 +4,9 @@ close all;
 
 %% Load in the data
 [num,txt,raw] = xlsread('Cross out blanks in registered 14.xlsx');
-
-%% SAT and ACT score convertion in num part
-
 [m,n] = size(num);
-for i = 1:m;
-    if num(i,46) == 22
-        num(i,45) = 1030;
-    elseif num(i,46) == 23
-        num(i,45) = 1070;
-    elseif num(i,46) == 24
-        num(i,45) = 1110;
-    elseif num(i,46) == 25
-        num(i,45) = 1150;
-    elseif num(i,46) == 26
-        num(i,45) = 1220;
-    elseif num(i,46) == 27
-        num(i,45) = 1220; 
-    elseif num(i,46) == 28
-        num(i,45) = 1260;
-    elseif num(i,46) == 29
-        num(i,45) = 1300;
-    elseif num(i,46) == 30
-        num(i,45) = 1340;
-    elseif num(i,46) == 31
-        num(i,45) = 1380;
-    elseif num(i,46) == 32
-        num(i,45) = 1420; 
-    elseif num(i,46) == 33
-        num(i,45) = 1460;
-    elseif num(i,46) == 34
-        num(i,45) = 1510; 
-    elseif num(i,46) == 35
-        num(i,45) = 1560;
-    elseif num(i,46) == 36
-        num(i,45) = 1600;
-    end
-end
 
-xlswrite('Cross out blanks in registered 14.xlsx',num(:,45),'AS2:AS1358')
-
-%% Mean center SAT score
+%% Mean center SAT score and Find the covariance matrix
 count = 0;
 for i = 1:m
     if (~isnan(num(i,50)))
@@ -80,7 +42,7 @@ C = cov(SAT_mean_centered, first_year_GPA);
 % imagesc(C)   
 % colormap(gray);
 % colorbar;
-%% Clustering, run K-means for nC=3 clusters
+%% Clustering, run K-means for nC=3 clusters (not working yet)
 
 nC = 3;
 SATreg = num(:,[45,47]);
@@ -98,14 +60,8 @@ objective = sum(SUMD);
 % set(gca,'XTick',[0;900;1600])
 % plot(SATreg(:,1),SATreg(:,2),'*');
 
-
-%% Survey part
-survey = A(:,[2,3,4,14]); % take out the parts i think are important
-
-
 %% Plot SAT scores, first year GPA and if they returned
 
-% RFall14 = 
 
 figure
 hold on 
@@ -124,6 +80,12 @@ ylabel('First Year GPA');
 title('SAT, First year GPA, Returned Fall 2015');
 
 hold off
+
+%% Survey part
+survey = A(:,[2,3,4,14]); % take out the parts i think are important
+
+
+
 
 
 
