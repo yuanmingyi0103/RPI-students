@@ -2,18 +2,26 @@
 [num,txt,raw] = xlsread('GPA ONLY.xlsx'); %read in the student data with only gpa
 
 [m,n] = size(num)
+% 
+% %change any blank or 0 labels to -1
+% for i = 1:m;
+%     if num(i,6) ~= 1;
+%         num(i,6) = -1;
+%     end
+%     if num(i,7) ~= 1;
+%         num(i,7) = -1;
+%     end
+% end
 
-%change any blank or 0 labels to -1
-for i = 1:m;
-    if num(i,6) ~= 1;
-        num(i,6) = -1;
-    end
-    if num(i,7) ~= 1;
-        num(i,7) = -1;
-    end
-end
 
+%plot(.3546,.338
 num = num(~any(isnan(num),2),:); %remove students with missing data
+
+returns = num(:,6:8);
+
+s14 = num(:,8);
+f14 = num(:,6);
+s15 = num(:,7);
 
 data = num(:,1:5); %strip the return labels
 
@@ -51,10 +59,10 @@ YTest = Y(train_size+1:end,:);
 
 %Break them up into Class 1 and Class -1
 Classp_train = Train(YTrain==1,:);
-Classm_train = Train(YTrain==-1,:);
+Classm_train = Train(YTrain==0,:);
 
 Classp_test = Test(YTest==1,:);
-Classm_test = Test(YTest==-1,:);
+Classm_test = Test(YTest==0,:);
 
 % %%
 % Train_total = [Classp_train; Classm_train];
