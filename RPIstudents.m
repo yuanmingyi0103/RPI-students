@@ -90,11 +90,40 @@ opts = statset('Display','final');
 [cidx, ctrs, SUMD, D]= kmeans(SATreg, nC,'Replicates',10,'Options',opts);
 
 % K=means objective
-objective = sum(SUMD)
+objective = sum(SUMD);
+% 
+% figure
+% hold on
+% set(gca,'YTick',[-1;0;1])
+% set(gca,'XTick',[0;900;1600])
+% plot(SATreg(:,1),SATreg(:,2),'*');
 
 
+%% Survey part
+survey = A(:,[2,3,4,14]); % take out the parts i think are important
 
 
+%% Plot SAT scores, first year GPA and if they returned
+
+% RFall14 = 
+
+figure
+hold on 
+for i = 1:m
+    if num(i,51) == 0
+        plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','red')
+    else if num(i,51) == 1
+            plot(num(i,45),num(i,50),'*','MarkerSize',5,'Color','blue')
+            
+        end
+    end
+end
+
+xlabel('SAT Score');
+ylabel('First Year GPA');
+title('SAT, First year GPA, Returned Fall 2015');
+
+hold off
 
 
 
