@@ -111,7 +111,11 @@ AllSurvey = A(:,2:36)
 % img_mean = mean(AllSurvey);
 % Survey_mean_centered = AllSurvey - ones(survey_N,1)*img_mean
 
-probplot(num(:,50:51))
-legend
+% probplot(num(:,50:51))
+% legend
+
+%% Playing around with Factor Analysis
+
+
 
         
