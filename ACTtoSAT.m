@@ -3,7 +3,7 @@ clear;
 close all;
 
 %% Load in the data
-[num,txt,raw] = xlsread('Cross out blanks in registered 14.xlsx');
+[num,txt,raw] = xlsread('NoCourses.xlsx');
 
 %% SAT and ACT score convertion in num part
 
@@ -42,4 +42,4 @@ for i = 1:m;
     end
 end
 
-xlswrite('Cross out blanks in registered 14.xlsx',num(:,45),'AS2:AS1358')
+xlswrite('NoCourses.xlsx',num(:,45),'AS2:AS1386')
