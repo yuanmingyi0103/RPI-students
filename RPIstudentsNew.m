@@ -35,4 +35,6 @@ TrainCorr = corr(TrainNew)
 imagesc(TrainCorr)
 % heatmap = HeatMap(TrainCov)
 
-%% 
+%% Sort SOC code
+SOC = sort(num(:,54),'descend')
+
