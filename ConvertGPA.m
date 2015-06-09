@@ -1,4 +1,4 @@
-[num,txt,raw] = xlsread('NoCourses.xlsx');
+[num,txt,raw] = xlsread('NoCourses2.xlsx');
 
 
 %num = num(~any(isnan(num),2),:); %remove students with missing data
