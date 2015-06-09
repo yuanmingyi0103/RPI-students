@@ -1,4 +1,4 @@
-[num,txt,raw] = xlsread('NoCourses2.xlsx');
+[num,txt,raw] = xlsread('NoCourses.xlsx');
 
 
 %num = num(~any(isnan(num),2),:); %remove students with missing data
@@ -52,7 +52,7 @@ for i = 1:m;
     
 end
 
-
+xlswrite('ConvertedGPA.xlsx', [num(:,1) gpa]);
 
 
 
