@@ -182,19 +182,12 @@ hold off
 
 %% Nearest Neighbor
 % Finds the nearest element in Train for each element in Test.
-% Classifier gives the index of the nearest Train for the corresponding row
-% in Test
+% Classifier gives the index of the nearest Train for the corresponding 
+%row in Test
 
 classifier=knnsearch(Train,Test);
 total_error=0;
 
-%%
-% for i=1:s,
-%     if(YTest(i)~=YTrain(classifier(i)))
-%         total_error=total_error+1;
-%     end
-% end
-% error_percent = total_error/s
 %% KNN Error
 [ptrain_m,ptrain_n]=size(Classp_train);
 [mtrain_m,mtrain_n]=size(Classm_train);
@@ -222,12 +215,8 @@ total_error = leave_error+stay_error
 error_percent = total_error/size(Test,1) % Total error of classifier
 
 
-%%
-clus = [s15 cidx];
+%
 
-one = sum(and(clus(:,1)==0,clus(:,2)==1));
-two = sum(and(clus(:,1)==0,clus(:,2)==2));
-three = sum(and(clus(:,1)==0,clus(:,2)==3));
 
 
 

@@ -38,3 +38,23 @@ figure
 imagesc(corr(poor))
 title('Poor Performers')
 colorbar
+
+%%
+
+figure
+imagesc(mean(good(:,1:35)))
+%colormap('gray')
+title('good')
+colorbar
+
+figure
+imagesc(mean(mid(:,1:35)))
+%colormap('gray')
+title('mid')
+colorbar
+
+figure
+imagesc(mean(poor(:,1:35)))
+%colormap('gray')
+title('poor')
+colorbar
