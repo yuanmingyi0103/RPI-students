@@ -105,7 +105,7 @@ HistClass(Classp_test,Classm_test,wfisher,tfisher,...
     'Fisher Method Testing Results',FisherTestError);
 %%
 
-nC = 2;
+nC = 3;
 
 % Do k-means with 10 restarts. 
 opts = statset('Display','final');
@@ -123,7 +123,7 @@ bar(explainedVar)
 [eigenvectors,zscores,eigenvalues] = pca(features);
 
 figure
-gscatter(zscores(:,27),zscores(:,28),cidx);
+gscatter(zscores(:,1),zscores(:,2),cidx);
 
 hold on
 legend
@@ -134,7 +134,7 @@ legend
 
 for j = 1:m
     
-    %plot(20*[0,eigenvectors(j,27)], 20*[0,eigenvectors(j,28)])
+    plot(20*[0,eigenvectors(j,2)], 20*[0,eigenvectors(j,3)])
     
 end
 
@@ -219,6 +219,13 @@ end
 total_error = merror+perror
 error_percent = total_error/s
 
+
+%%
+clus = [s15 cidx];
+
+one = sum(and(clus(:,1)==0,clus(:,2)==1))
+two = sum(and(clus(:,1)==0,clus(:,2)==2))
+three = sum(and(clus(:,1)==0,clus(:,2)==3))
 
 
 

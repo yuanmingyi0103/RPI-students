@@ -1,4 +1,10 @@
 %%
+clear;
+close all;
+
+
+%%
+
 [num,txt,raw] = xlsread('GPA ONLY.xlsx');
 
 data = num(:,1:5);
@@ -36,7 +42,7 @@ gscatter(zscores(:,1),zscores(:,2),cidx);
 hold on
 legend
 
-for j = 1:2
+for j = 1:5
     
     plot(3.5*[0,eigenvectors(j,1)], 3.5*[0,eigenvectors(j,2)])
     %text(3.5*[0,eigenvectors(j,1)], 3.5*[0,eigenvectors(j,2)], s15_predtxt(j))

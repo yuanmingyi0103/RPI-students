@@ -14,7 +14,7 @@
 % end
 
 
-%plot(.3546,.338
+
 num = num(~any(isnan(num),2),:); %remove students with missing data
 
 returns = num(:,6:8);
@@ -140,3 +140,10 @@ FisherTestError= ((FisherPosErrorTest + FisherNegErrorTest)/(size(Test,1)))
 % Histogram of Fisher Testing Results
 HistClass(Classp_test,Classm_test,wfisher,tfisher,...
     'Fisher Method Testing Results',FisherTestError);
+%% 
+
+[eigenvectors, scores, eigenvalues] = pca(data);
+
+explainedVar = cumsum(eigenvalues./sum(eigenvalues) * 100)
+figure
+bar(explainedVar)
