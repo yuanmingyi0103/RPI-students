@@ -109,7 +109,7 @@ nC = 3;
 
 % Do k-means with 10 restarts. 
 opts = statset('Display','final');
-[cidx, ctrs, SUMD, D]= kmeans(Train, nC,'Replicates',10,'Options',opts);;
+[cidx, ctrs, SUMD, D]= kmeans(features, nC,'Replicates',10,'Options',opts);;
 
 % K=means objective
 objective = sum(SUMD);
@@ -153,28 +153,27 @@ hold off
 
 
 
-%%
-% 
-% k_obj = ones(15,2);
-% 
-% for nC = 1:15   
-% % Do k-means with 10 restarts. 
-%     opts = statset('Display','final');
-%     [cidx, ctrs, SUMD, D]= kmeans(data, nC,'Replicates',10,'Options',opts);
-% 
-% % K=means objective
-%     objective = sum(SUMD)
-%     k_obj(nC,:) = [nC;objective]
-% 
-% end
-% %}
-% %%
-% 
-% 
-% figure
-% hold on
-% plot(k_obj(:,1),k_obj(:,2))
-% hold off
+%% Skree Plot
+
+k_obj = ones(15,2);
+
+for nC = 1:15   
+% Do k-means with 10 restarts. 
+    opts = statset('Display','final');
+    [cidx, ctrs, SUMD, D]= kmeans(data, nC,'Replicates',10,'Options',opts);
+
+% K=means objective
+    objective = sum(SUMD);
+    k_obj(nC,:) = [nC;objective];
+
+end
+
+
+
+figure
+hold on
+plot(k_obj(:,1),k_obj(:,2))
+hold off
 
 
 %biplot(eigenvectors(:,1:2), 'scores',zscores(:,1:2))
@@ -212,7 +211,7 @@ stay_error_percent = stay_error/size(Classp_test,1) % percent error on those who
 
 
 leave_error=0;
-for i=ptest_m+1:s,
+for i=ptest_m+1:size(Test,1);
     if(YTest(i)~=YTrain(classifier(i)))
         leave_error=leave_error+1;
     end

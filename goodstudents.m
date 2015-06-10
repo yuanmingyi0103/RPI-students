@@ -2,15 +2,16 @@
 clear;
 close all;
 %%
-[poor,txt,raw] = xlsread('NoCoursesWithGPA.xlsx');
+[num,txt,raw] = xlsread('NoCoursesWithGPA.xlsx');
 
-data = poor(:,2:end);
-first_gpa = data(:,46);
+data = [num(:,2:44) num(:,47:49) num(:,51:end)];
+
+first_gpa = data(:,44);
 %%
 good = nan(size(data));
 poor = nan(size(data));
 [m,n] = size(data);
-
+mid = nan(size(data));
 for i = 1:m;
     if first_gpa(i) >= 3.0;
         good(i,:) = data(i,:);
@@ -18,11 +19,14 @@ for i = 1:m;
     if first_gpa(i) <= 2.5;
         poor(i,:) = data(i,:);
     end
+    if and(first_gpa(i) < 3, first_gpa(i)>2.5);
+        mid(i,:) = data(i,:);
+    end
 end
 
 good = good(~any(isnan(good),2),:); %remove students with missing data
 poor = poor(~any(isnan(poor),2),:); %remove students with missing data
-
+mid = mid(~any(isnan(mid),2),:);
 %%
 
 figure
