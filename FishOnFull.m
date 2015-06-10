@@ -105,11 +105,11 @@ HistClass(Classp_test,Classm_test,wfisher,tfisher,...
     'Fisher Method Testing Results',FisherTestError);
 %%
 
-nC = 2;
+nC = 3;
 
 % Do k-means with 10 restarts. 
 opts = statset('Display','final');
-[cidx, ctrs, SUMD, D]= kmeans(features, nC,'Replicates',10,'Options',opts);
+[cidx, ctrs, SUMD, D]= kmeans(Train, nC,'Replicates',10,'Options',opts);;
 
 % K=means objective
 objective = sum(SUMD);
@@ -123,7 +123,7 @@ bar(explainedVar)
 [eigenvectors,zscores,eigenvalues] = pca(features);
 
 figure
-gscatter(zscores(:,27),zscores(:,28),cidx);
+gscatter(zscores(:,1),zscores(:,2),cidx);
 
 hold on
 legend
@@ -134,7 +134,7 @@ legend
 
 for j = 1:m
     
-    %plot(20*[0,eigenvectors(j,27)], 20*[0,eigenvectors(j,28)])
+    plot(20*[0,eigenvectors(j,2)], 20*[0,eigenvectors(j,3)])
     
 end
 
@@ -181,13 +181,13 @@ hold off
 
 
 
-%%
-Train = [Classp_train; Classm_train];
-Test = [Classp_test; Classm_test];
+%% Nearest Neighbor
+% Finds the nearest element in Train for each element in Test.
+% Classifier gives the index of the nearest Train for the corresponding row
+% in Test
 
 classifier=knnsearch(Train,Test);
 total_error=0;
-[s,z]=size(Test)
 
 %%
 % for i=1:s,
@@ -196,29 +196,39 @@ total_error=0;
 %     end
 % end
 % error_percent = total_error/s
-%%
+%% KNN Error
 [ptrain_m,ptrain_n]=size(Classp_train);
 [mtrain_m,mtrain_n]=size(Classm_train);
 [ptest_m,ptest_n]=size(Classp_test);
 [mtest_m,mtest_n]=size(Classm_test);
 
-perror=0;
+stay_error=0;
 for i=1:ptest_m,
     if(YTest(i)~=YTrain(classifier(i)))
-        perror=perror+1;
+        stay_error=stay_error+1;
     end
 end
+stay_error_percent = stay_error/size(Classp_test,1) % percent error on those who stayed
 
-merror=0;
+
+leave_error=0;
 for i=ptest_m+1:s,
     if(YTest(i)~=YTrain(classifier(i)))
-        merror=merror+1;
+        leave_error=leave_error+1;
     end
 end
+leave_error_percent = leave_error/size(Classm_test,1) % percent error on those who left
 
-total_error = merror+perror
-error_percent = total_error/s
+total_error = leave_error+stay_error
+error_percent = total_error/size(Test,1) % Total error of classifier
 
+
+%%
+clus = [s15 cidx];
+
+one = sum(and(clus(:,1)==0,clus(:,2)==1));
+two = sum(and(clus(:,1)==0,clus(:,2)==2));
+three = sum(and(clus(:,1)==0,clus(:,2)==3));
 
 
 

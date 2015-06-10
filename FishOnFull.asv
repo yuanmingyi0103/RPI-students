@@ -109,7 +109,7 @@ nC = 3;
 
 % Do k-means with 10 restarts. 
 opts = statset('Display','final');
-[cidx, ctrs, SUMD, D]= kmeans(features, nC,'Replicates',10,'Options',opts);
+[cidx, ctrs, SUMD, D]= kmeans(features, nC,'Replicates',10,'Options',opts);;
 
 % K=means objective
 objective = sum(SUMD);
@@ -181,13 +181,13 @@ hold off
 
 
 
-%%
-Train = [Classp_train; Classm_train];
-Test = [Classp_test; Classm_test];
+%% Nearest Neighbor
+% Finds the nearest element in Train for each element in Test.
+% Classifier gives the index of the nearest Train for the corresponding row
+% in Test
 
 classifier=knnsearch(Train,Test);
 total_error=0;
-[s,z]=size(Test)
 
 %%
 % for i=1:s,
@@ -196,7 +196,7 @@ total_error=0;
 %     end
 % end
 % error_percent = total_error/s
-%%
+%% KNN Error
 [ptrain_m,ptrain_n]=size(Classp_train);
 [mtrain_m,mtrain_n]=size(Classm_train);
 [ptest_m,ptest_n]=size(Classp_test);
@@ -208,24 +208,27 @@ for i=1:ptest_m,
         perror=perror+1;
     end
 end
+perror_percent = perror/size(Classp_test,1) % percent error on those who stayed
 
-merror=0;
+
+merro=0;
 for i=ptest_m+1:s,
     if(YTest(i)~=YTrain(classifier(i)))
         merror=merror+1;
     end
 end
+merror_percent = merror/size(Classm_test,1) % percent error on those who left
 
 total_error = merror+perror
-error_percent = total_error/s
+error_percent = total_error/size(Test,1) % Total error of classifier
 
 
 %%
 clus = [s15 cidx];
 
-one = sum(and(clus(:,1)==0,clus(:,2)==1))
-two = sum(and(clus(:,1)==0,clus(:,2)==2))
-three = sum(and(clus(:,1)==0,clus(:,2)==3))
+one = sum(and(clus(:,1)==0,clus(:,2)==1));
+two = sum(and(clus(:,1)==0,clus(:,2)==2));
+three = sum(and(clus(:,1)==0,clus(:,2)==3));
 
 
 
